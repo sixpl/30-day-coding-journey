@@ -1,52 +1,57 @@
 from fastapi import FastAPI
-import psycopg2
+# import psycopg2
 
 app = FastAPI()
 
-conn = psycopg2.connect(
-    dbname = "calculator_db",
-    user = "sixpl",
-    host = "localhost"
-)
+# conn = psycopg2.connect(
+#     dbname = "calculator_db",
+#     user = "sixpl",
+#     host = "localhost"
+# )
 
-cursor = conn.cursor()
+# cursor = conn.cursor()
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS calculations (
-               id SERIAL PRIMARY KEY,
-               num1 INTEGER,
-               num2 INTEGER,
-               result INTEGER
-               );
-""")
+# cursor.execute("""
+# CREATE TABLE IF NOT EXISTS calculations (
+#                id SERIAL PRIMARY KEY,
+#                num1 INTEGER,
+#                num2 INTEGER,
+#                result INTEGER
+#                );
+# """)
 
-conn.commit()
+# conn.commit()
 
 @app.get("/")
 def home():
-    return{"message": "Database is connected"}
+    return{"message": "App is running!"}
 
 @app.get("/hello")
 def say_hello():
     return{"status": "Working"}
 
 @app.get("/add")
-def sum_calculator(a: int, b: int):
+def sum_cal(a:int, b:int):
     result = a + b
-    cursor.execute(
+    return{"Addition is": result }
 
-        "INSERT INTO calculations (num1, num2, result) VALUES (%s, %s, %s)",
-        (a, b, result)
-    )
-    conn.commit()
+# @app.get("/add")
+# def sum_calculator(a: int, b: int):
+#     result = a + b
+#     cursor.execute(
 
-    return{"result: ": result}
+#         "INSERT INTO calculations (num1, num2, result) VALUES (%s, %s, %s)",
+#         (a, b, result)
+#     )
+#     conn.commit()
 
-@app.get("/history")
-def history():
-    cursor.execute("SELECT * FROM calculations")
-    rows = cursor.fetchall()
-    return{"data": rows}
+#     return{"result: ": result}
+
+# @app.get("/history")
+# def history():
+#     cursor.execute("SELECT * FROM calculations")
+#     rows = cursor.fetchall()
+#     return{"data": rows}
 
 @app.get("/subtract")
 def subtraction_calculator(a: int, b: int):
