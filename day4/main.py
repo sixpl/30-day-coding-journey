@@ -65,7 +65,8 @@ def sum_cal(a:int, b:int):
     )
 
     conn.commit()
-    cur.close(conn.close())
+    cur.close()
+    conn.close()
 
     return{"Addition is": result }
 
