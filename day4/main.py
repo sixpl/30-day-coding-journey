@@ -33,7 +33,7 @@ def say_hello():
 @app.get("/add")
 def sum_cal(a:int, b:int):
     result = a + b
-    return{"Addition is": result + "error" }
+    return{"Addition is": result }
 
 # @app.get("/add")
 # def sum_calculator(a: int, b: int):
