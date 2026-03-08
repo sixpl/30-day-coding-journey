@@ -108,12 +108,14 @@ def get_history():
     conn = get_connection()
     cur = conn.cursor()
     cur.execute(
-        " SELECT * FROM calculations"
+        "SELECT * FROM calculations"
     )
     rows = cur.fetchall()
 
-    conn.close()
+    conn.commit()
     cur.close()
+    conn.close()
+    
 
     history_list = []
 
