@@ -102,3 +102,29 @@ def multiply_calculator(a: int, b: int):
 def division_calculator(a: int, b: int):
     result = a / b
     return{"result: ": result}
+
+@app.get("/histoy")
+def get_history():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute(
+        " SELECT * FROM calculations"
+    )
+    rows = cur.fetchall()
+
+    conn.close()
+    cur.close()
+
+    history_list = []
+
+    for row in rows:
+        history_list.append({
+            "id": row[0],
+            "a": row[1],
+            "b": row[2],
+            "result": row[3]
+        })
+
+        return history_list
+
+
