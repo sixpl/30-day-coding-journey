@@ -103,7 +103,7 @@ def division_calculator(a: int, b: int):
     result = a / b
     return{"result: ": result}
 
-@app.get("/histoy")
+@app.get("/history")
 def get_history():
     conn = get_connection()
     cur = conn.cursor()
@@ -112,7 +112,6 @@ def get_history():
     )
     rows = cur.fetchall()
 
-    conn.commit()
     cur.close()
     conn.close()
     
