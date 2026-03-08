@@ -125,6 +125,6 @@ def get_history():
             "result": row[3]
         })
 
-        return history_list
+    return history_list
 
 
